@@ -1,13 +1,21 @@
 body
 {
+
+  font-family: Arial, Helvetica, sans-serif;
 		color :black;
-		background-color: rgb(211,211,211);
+		background-color: #F4A460;
 		background-size: 100%;
 		margin: 5% 10% 5% 10%;
 			text-align : justify;
 }
+p{
+font-family:'open sans';
+font-style: normal;
+font-size:20px;
+}
 h2
 {
+
 	color : rgb(92,1,11);
 	text-align:center;
 	
@@ -15,8 +23,8 @@ h2
 
 table
 {
-	color: rgb(180,1,11);
-    background-color: rgb(291, 291,291) ;
+	color: black;
+    background-color: white ;
     margin-left: 15%;
     width: 80%;
     font-size: 25;}
@@ -30,12 +38,10 @@ nav {
 
 }
 
-p
-{
 
-
+button{
+width: 400;
 }
-
 
 /*body
 {
