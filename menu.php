@@ -13,10 +13,11 @@
 -->
 <TABLE BORDER="2">
 <TR>
+<TH> <a href='acceuil.php'>Accueil</a> </TH>
 <TH> Catalogue d'instruments </TH>
-<TH> Nos fournisseurs </TH>
+<TH>Nos fournisseurs </TH>
 <TH> Nos magasins </TH>
-<TH> Mon compte</TH>
+<TH>  <a href='identification.php' color='red'>Mon compte</a></TH>
 </TR>
 </TABLE>
      
