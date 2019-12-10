@@ -3,6 +3,11 @@
     <head>
         <title>Page d'Accueil </title>
         <link href='style.css' rel='stylesheet' type='text/css'>
+		<!-- Compiled and minified CSS -->
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+		<!-- Compiled and minified JavaScript -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
         <meta charset="utf-8" />
     </head>
 
@@ -20,16 +25,33 @@
     </p>
    
    <hr>
-    <h2> Qui sommes-nous ?</h2>
-     <p> <br>
-    <list>
-    <li> Notre histoire: <br></li>
-    <li> Notre premier magasin: <br></li>
-    <li> Abdel: <br></li>
-    <li> Hugo <br></li>
-    </list>
-    </p>
+
     
+     <div class="divider"></div>
+  <div class="section">
+    <h5>Qui sommes-nous ?</h5>
+    <p>Stuff</p>
+  </div>
+  <div class="divider"></div>
+  <div class="section">
+    <h5>Notre histoire:</h5>
+    <p>Stuff</p>
+  </div>
+  <div class="divider"></div>
+  <div class="section">
+    <h5>Notre premier magasin:</h5>
+    <p>Stuff</p>
+    
+     <div class="divider"></div>
+  <div class="section">
+    <h5>Abdelmajid Omarjee:</h5>
+    <p>Stuff</p>
+    
+     <div class="divider"></div>
+  <div class="section">
+    <h5>Hugo Tedeschi</h5>
+    <p>Stuff</p>
+  </div>
     
     </body>
     
