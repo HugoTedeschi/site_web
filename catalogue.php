@@ -16,7 +16,7 @@
 <?php
 
 
-$link = new mysqli('localhost', 'user', 'user', 'Projet');
+$link = new mysqli('localhost', 'user', 'user', 'madata');
 if ($link->connect_errno) {
  die ("Erreur de connexion : errno: " . $link->errno . " error: " . $link->error);
 }
