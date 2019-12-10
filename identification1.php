@@ -17,22 +17,27 @@
 			}
 			
 			$link->select_db("madata");
-	        $login=$_Post['login'];
-	        $mdp=$_Post['mdp'];
-			$sql_pseudos = "SELECT identifiant FROM Compte WHERE '$login' = identifiant AND '$mdp' = mdp"; // On select le couple correspondant dans la BDD
+	        $login=$_POST['login'];
+	        $mdp=$_POST['mdp'];
+			$sql_pseudos = "SELECT identifiant FROM Compte WHERE '$login'= identifiant AND '$mdp' = mdp"; // On select le couple correspondant dans la BDD
 			//var_dump($sql_pseudos);
-			$pseudos_existants = $link->query($sql_pseudos) 
-				or die("pb de requetes ".$link->error);
-
+			$pseudos_existants = $link->query($sql_pseudos) ;
+			
+				
+			$sql_type="SELECT type FROM Compte WHERE '$login' = identifiant" ;
+			$type=$link->query($sql_type);
+				var_dump($type);
+				
 			if($pseudos_existants ->num_rows){
 				
 				//Si le pseudo et le mot de passe correspondent tout va bien
-				//session_start(); // LANCEMENT SESSION
-				//$_SESSION['pseudo'] = $login; // CREATION VARIABLE GLOBALE login
+				session_start(); // LANCEMENT SESSION
+				 
+				$_SESSION['identifiant'] = $login; // CREATION VARIABLE GLOBALE login
 				//$aa = $CodeCompagnie->fetch_row();
-				//$_SESSION['CodeCompagnie'] = $aa[0];  // CREATION VARIABLE GLOBALE CODE CIE
-			echo "Bon retour parmis nous "; echo "$login"; echo"!";
-				
+				$_SESSION['type'] =$type ;  // CREATION VARIABLE GLOBALE CODE CIE
+				echo "Bon retour parmis nous"; echo "$login"; echo"!"; 
+			
 			}
 
 			else{
@@ -50,7 +55,7 @@
 			}
 			$link->close();
 			
-			$essai = '<META HTTP-EQUIV="Refresh" CONTENT="15,acceuil.php">';
+			$essai = '<META HTTP-EQUIV="Refresh" CONTENT="60,acceuil.php">';
 				echo "$essai";
   		?>
         
