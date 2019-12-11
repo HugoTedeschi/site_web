@@ -22,6 +22,13 @@
     <li>Nos fournisseurs: Fender, Gibson, Kumalae et bien d'autres illustres ateliers, connus à travers le monde <br></li>
     <li>Toutes les adresses de nos magasins situés en France. <br></li>
     </list>
+    
+    <form method="post">
+	
+</form>
+    
+    
+    
     </p>
    
    <hr>
