@@ -3,7 +3,7 @@ body
 
   font-family: Arial, Helvetica, sans-serif;
 		color :black;
-		background-color: #F4A460;
+		background-color: black;
 		background-size: 100%;
 		margin: 5% 10% 5% 10%;
 			text-align : justify; 
@@ -24,7 +24,7 @@ h2
 table
 {
 	color: black;
-    background-color: white ;
+    background-color: black ;
     margin-left: 15%;
     width: 80%;
     font-size: 25;}
@@ -32,18 +32,45 @@ table
 
 nav {
 	color: rgb(180,1,11);
-    background-color: rgb(291, 291,291) ;
+    background-color: black ;
 	
 	
 
 }
-
+.p2{
+ text-align: center;
+}
 
 button{
 width: 400;
 }
 
-/*body
+#blocdroite
+{
+float: left;
+width: 75%;
+background-color: black;
+
+text-align:center;
+
+color: black;
+
+
+}
+
+#blocgauche
+{
+float: left;
+width: 25%;
+margin-left:0%;
+    color: black;
+background-color:#d4d4d4;
+
+}
+
+
+/*
+body
 {
 	background-color: rgb(211,211,211);
 	background-size: 100%;
@@ -108,34 +135,13 @@ nav a{
 
 }
 
-#blocdroite
-{
-float: left;
-width: 75%;
-background-color: black;
-
-text-align:center;
-
-color: black;
-
-
-}
-
-#blocgauche
-{
-float: left;
-width: 25%;
-margin-left:0%;
-    color: black;
-background-color:#d4d4d4;
-
-}
 
 
 
 
 li { 
 display : inline;
-padding : 0 0.5em; /*Espacement entre les boutons*/
-}*/
+padding : 0 0.5em; Espacement entre les boutons
+}
+*/
 
