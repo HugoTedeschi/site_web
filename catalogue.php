@@ -2,11 +2,13 @@
 <title> Catalogue</title>
 
 
- <link href='style.css' rel='stylesheet' type='text/css'>
+
 <link <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 …
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+ <link href='style.css' rel='stylesheet' type='text/css'>
   <?php include("menu.php"); ?>
 
 	
@@ -38,6 +40,8 @@ if ($link->connect_errno) {
  * 
  * 
  */
+ 
+ 
 $prix=0;
 $marque ='rien';
 $modele ='rien';
@@ -46,14 +50,6 @@ $catalogue = $link->query( "SELECT modele, type, nom_fourn, prix, SUM(en_stock) 
 FROM liste_stockes
 GROUP BY modele, type, nom_fourn
 ORDER BY prix;" )
-or die("SELECT Error: ".$link->error);
-
-
-$result_marque = $link->query( "(SELECT modele, type, nom_fourn, prix, SUM(en_stock) AS Nombre
-FROM liste_stockes
-WHERE nom_fourn = '$marque'
-GROUP BY modele, type, nom_fourn
-ORDER BY prix);" )
 or die("SELECT Error: ".$link->error);
 
 
@@ -96,6 +92,7 @@ print "
                 <option value = 'Selmer'>Selmer</option> 
                 <option value = 'Yamaha'>Yamaha</option> 
                 <option value = 'Hohner'>Hohner</option> 
+             
             </select> 
             <input type = 'submit' name = 'submit' value = Submit> 
         </form> 
@@ -123,7 +120,7 @@ print "
 
 
 
-print "<table width=200 border=1   style='background:black; color:white;'>\n";
+print "<table width=300 border=1   style='background:black; color:white;'>\n";
 
 
 print "<form id='FormulaireCommande' method='POST' action='commande.php'";
@@ -162,6 +159,17 @@ $value = "Modèle";
   
  print "</tr>\n";
  
+ 
+$sql_marque="(SELECT modele, type, nom_fourn, prix, SUM(en_stock) AS Nombre
+FROM liste_stockes
+WHERE nom_fourn = '$marque'
+GROUP BY modele, type, nom_fourn
+ORDER BY prix)";
+
+$result_marque = $link->query( $sql_marque )
+or die("SELECT Error: ".$link->error);
+var_dump($result_marque);
+ 
  if($marque == 'rien')
  {
 	 $result = $catalogue;
@@ -169,7 +177,9 @@ $value = "Modèle";
  else
  {
 	 $result = $result_marque ;
-	 echo "$marque";
+	 
+	 echo "else, on affecte $marque à la table";
+	 
  }
        		
 while ($get_info = $result->fetch_row()){
