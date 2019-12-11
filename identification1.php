@@ -19,14 +19,13 @@
 			$link->select_db("madata");
 	        $login=$_POST['login'];
 	        $mdp=$_POST['mdp'];
+	        
 			$sql_pseudos = "SELECT identifiant FROM Compte WHERE '$login'= identifiant AND '$mdp' = mdp"; // On select le couple correspondant dans la BDD
-			//var_dump($sql_pseudos);
 			$pseudos_existants = $link->query($sql_pseudos) ;
-			
-				
+		
 			$sql_type="SELECT type FROM Compte WHERE '$login' = identifiant" ;
 			$type=$link->query($sql_type);
-				var_dump($type);
+	
 				
 			if($pseudos_existants ->num_rows){
 				
@@ -34,8 +33,9 @@
 				session_start(); // LANCEMENT SESSION
 				 
 				$_SESSION['identifiant'] = $login; // CREATION VARIABLE GLOBALE login
-				//$aa = $CodeCompagnie->fetch_row();
-				$_SESSION['type'] =$type ;  // CREATION VARIABLE GLOBALE CODE CIE
+				$aa = $type->fetch_row();
+				$_SESSION['type'] =$aa[0];  // CREATION VARIABLE GLOBALE CODE CIE
+				$t=$_SESSION['type'];
 				echo "Bon retour parmis nous"; echo "$login"; echo"!"; 
 			
 			}
