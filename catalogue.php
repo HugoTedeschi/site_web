@@ -94,7 +94,7 @@ print "
                 <option value = 'Hohner'>Hohner</option> 
              
             </select> 
-            <input type = 'submit' name = 'submit' value = Submit> 
+            <input type = 'submit' name = 'submit' value = Selectionner   style='background:grey; color:white;'> 
         </form> 
 	    </td>
 		
@@ -112,7 +112,7 @@ print "
         { 
 			$marque = $_POST['choix_marque'];
               
-                print "vous avez choisis de voir les instruments de la marque $marque<br/>"; 
+                
         } 
     else
         echo "Aucune marque selectionnée, retour au catalogue des instruments."; 
@@ -123,7 +123,7 @@ print "
 print "<table width=300 border=1   style='background:black; color:white;'>\n";
 
 
-print "<form id='FormulaireCommande' method='POST' action='commande.php'";
+print "<form id='FormulaireCommande'  method='POST' action='commande.php'";
 
 
 
@@ -134,7 +134,7 @@ print "<tr>\n";
  print "\t<td></td>\n";
  print "\t<td></td>\n";
  print "\t<td></td>\n";
- print "\t<td><input type='submit' value='Passer la commande' style='width:350px; background:grey;'></td>\n";
+ print "\t<td><input type='submit' value='Passer la commande' name ='commande'style='width:350px; background:grey;'></td>\n";
     
   
  print "</tr>\n";
@@ -168,7 +168,6 @@ ORDER BY prix)";
 
 $result_marque = $link->query( $sql_marque )
 or die("SELECT Error: ".$link->error);
-var_dump($result_marque);
  
  if($marque == 'rien')
  {
@@ -178,8 +177,7 @@ var_dump($result_marque);
  {
 	 $result = $result_marque ;
 	 
-	 echo "else, on affecte $marque à la table";
-	 
+	
  }
        		
 while ($get_info = $result->fetch_row()){
@@ -193,7 +191,7 @@ while ($get_info = $result->fetch_row()){
  {  // on fait indice par indice pour le sous tableau (une ligne de la table en gros)
 	print "\t<td> $field</td>\n";
  }
- print "\t<td> <input type='checkbox' name= 'test' value='$get_info[0]'></td>\n";
+ print "\t<td> <input type='checkbox' name= 'formulaire[]' value='$get_info[0].$get_info[1].$get_info[2].$get_info[3].$get_info[4]'></td>\n";
  
  
  
