@@ -44,6 +44,7 @@ if ($link->connect_errno) {
 $prix=0;
 $marque ='rien';
 $modele ='rien';
+$type ='rien';
 
 $catalogue = $link->query( "SELECT modele, type, nom_fourn, prix, SUM(en_stock) AS Nombre
 FROM liste_stockes
@@ -52,12 +53,9 @@ ORDER BY prix;" )
 or die("SELECT Error: ".$link->error);
 
 
-$result_modele = $link->query( "SELECT modele, type, nom_fourn, prix, SUM(en_stock) AS Nombre
-FROM liste_stockes
-WHERE modele = '$modele'
-GROUP BY modele, type, nom_fourn
-ORDER BY modele;" )
-or die("SELECT Error: ".$link->error);
+
+
+
 
 $result_inf = $link->query( "SELECT modele, type, nom_fourn, prix, SUM(en_stock) AS Nombre
 FROM liste_stockes
@@ -93,10 +91,27 @@ print "
                 <option value = 'Hohner'>Hohner</option> 
              
             </select> 
-            <input type = 'submit' name = 'submit' value = Selectionner   style='background:grey; color:white;'> 
+            <input type = 'submit' name = 'submit' value = Appliquer   style='background:grey; color:white;'> 
         </form> 
 	    </td>
 		
+		<br>
+		<td>
+         <form method = 'post'>  
+           
+              
+            <select name = 'choix_type'style='background:black; color:white;'>   
+                <option value = 'rien'>Aucun type selectionnée</option> 
+                <option value = 'flute'>Flute</option> 
+                <option value = 'guitare'>Guitare</option> 
+                <option value = 'basse'>Basse</option> 
+                <option value = 'ukulele'>Ukulele</option> 
+                <option value = 'clarinette'>Clarinette</option> 
+             
+            </select> 
+            <input type = 'submit' name = 'submit2' value = Appliquer style='background:grey; color:white;'> 
+        </form> 
+	    </td>
 	
 	</table>
 		
@@ -104,7 +119,7 @@ print "
        
 
 ";
-  if(isset($_POST["submit"]))  
+  if(isset($_POST['submit']))  
     { 
         // Check if any option is selected 
         if(isset($_POST['choix_marque']))  
@@ -116,6 +131,34 @@ print "
     else
         echo "Aucune marque selectionnée, retour au catalogue des instruments."; 
     } 
+    
+      if(isset($_POST['submit2']))  
+    { 
+        // Check if any option is selected 
+        if(isset($_POST['choix_type']))  
+        { 
+			$type = $_POST['choix_type'];
+              
+                
+        } 
+    else
+        echo "Aucune type d'instruments selectionné, retour au catalogue des instruments."; 
+    } 
+    
+    
+      //~ if(isset($_POST['submit2']) and isset($_POST['submit']))  
+    //~ { 
+        //~ // Check if any option is selected 
+        //~ if(isset($_POST['choix_type']) and isset($_POST['choix_type']))  
+        //~ { 
+			//~ $marque = $_POST['choix_marque'];
+			//~ $type = $_POST['choix_type'];
+              
+                
+        //~ } 
+    //~ else
+        //~ echo "Aucune marque selectionnée, ni de type spécifiques: retour au catalogue des instruments."; 
+    //~ } 
 
 
 
@@ -158,6 +201,14 @@ $value = "Modèle";
   
  print "</tr>\n";
  
+$sql_type = "(SELECT modele, type, nom_fourn, prix, SUM(en_stock) AS Nombre
+FROM liste_stockes
+WHERE type = '$type'
+GROUP BY modele, type, nom_fourn
+ORDER BY modele)"; 
+
+$result_type = $link->query( $sql_type )
+or die("SELECT Error: ".$link->error);
  
 $sql_marque="(SELECT modele, type, nom_fourn, prix, SUM(en_stock) AS Nombre
 FROM liste_stockes
@@ -167,17 +218,45 @@ ORDER BY prix)";
 
 $result_marque = $link->query( $sql_marque )
 or die("SELECT Error: ".$link->error);
+
+
+//~ $sql_marqueEttype=$result_inf = "(SELECT modele, type, nom_fourn, prix, SUM(en_stock) AS Nombre
+//~ FROM liste_stockes
+//~ WHERE type='$type' and nom_fourn='$marque'
+//~ GROUP BY modele, type, nom_fourn
+//~ ORDER BY prix);" 
+//~ or die("SELECT Error: ".$link->error);
+
+//~ $resut_marqueEttype = $link->query( $sql_marqueEttype )
+//~ or die("SELECT Error: ".$link->error);
+
+
+
+
  
- if($marque == 'rien')
+ if($marque == 'rien' and $type=='rien')
  {
 	 $result = $catalogue;
  }
- else
+ if($marque == 'rien' and $type != 'rien')
  {
-	 $result = $result_marque ;
+	 $result = $result_type ;
 	 
 	
  }
+ if($marque != 'rien' and $type == 'rien')
+ {
+	 $result = $result_marque;
+	 
+	
+ }
+ //~ if($marque != 'rien' and $type != 'rien')
+ //~ {
+	 //~ $result = $result_marqueEttype;
+	 
+	
+ //~ }
+ 
    
    
 
