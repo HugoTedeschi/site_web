@@ -40,8 +40,7 @@ if ($link->connect_errno) {
  * 
  * 
  */
- 
- 
+
 $prix=0;
 $marque ='rien';
 $modele ='rien';
@@ -123,7 +122,7 @@ print "
 print "<table width=300 border=1   style='background:black; color:white;'>\n";
 
 
-print "<form id='FormulaireCommande'  method='POST' action='commande.php'";
+print "<form id='FormulaireCommande'  method='POST' action='pre_commande.php'";
 
 
 
@@ -179,25 +178,28 @@ or die("SELECT Error: ".$link->error);
 	 
 	
  }
-       		
+   
+   
+
 while ($get_info = $result->fetch_row()){
+	  
+	
+	
  print "<tr>\n";
- 
- 
- 
- 
  // en gros faudrait pouvoir récupérer la valeur de get_info[0], correspondant à l'indice de l'instru.
  foreach ($get_info as $field)
  {  // on fait indice par indice pour le sous tableau (une ligne de la table en gros)
 	print "\t<td> $field</td>\n";
+    
+	
  }
- print "\t<td> <input type='checkbox' name= 'formulaire[]' value='$get_info[0].$get_info[1].$get_info[2].$get_info[3].$get_info[4]'></td>\n";
+ print "\t<td> <input type='checkbox' name='formulaire[]' value='$get_info[0]'></td>\n";
  
  
  
- print "</tr>\n"; // permet de séparer les lignes de la table entres-elles.
-}
+ print "</tr>\n"; // permet de séparer les lignes de la table entres elles.
 
+}
 
 print "</form>";
 print "</table>\n";
