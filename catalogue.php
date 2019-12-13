@@ -9,14 +9,14 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
  <link href='style.css' rel='stylesheet' type='text/css'>
-  <?php include("menu.php"); ?>
+ 	<?php include("header.php"); ?>
 
 	
 </head>
 
 
 <body style='background:black; color:white;'>
-	
+
 	<h2>Bienvenue sur notre catalogue en ligne !</h2>
 		<form action="catalogue.php" >
 		<center>	<input type="submit" value="Revenir au catalogue"  style='width:500px; background:grey; padding : 20px; font-size: 40px; text-align: center;' /></center>
@@ -204,7 +204,7 @@ while ($get_info = $result->fetch_row()){
 print "</form>";
 print "</table>\n";
 
-$result-->free();
+$result->free();
 $link->close();
 ?>
 
