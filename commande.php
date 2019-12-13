@@ -2,7 +2,8 @@
 <head>
 <title>Commande</title>
 
-
+	
+	
 
 <link <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 …
@@ -10,7 +11,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
  <link href='style.css' rel='stylesheet' type='text/css'>
-  <?php include("menu.php"); ?>
+  <?php include("header.php"); ?>
 
 	
 </head>

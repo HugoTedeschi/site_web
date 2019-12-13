@@ -2,15 +2,6 @@
 
 <html>
 
-<!--
- <nav>
-<li><a>Accueil</a></li>
-<li><a>Catalogue d'instruments</a></li>
-<li><a>Nos Magasins</a></li>
-<li><a>Nos Fournisseurs</a></li>
-
-</nav> 
--->
 <TABLE BORDER="2">
 <TR>
 <TH> <a href='acceuil.php'>Accueil</a> </TH>

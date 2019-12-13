@@ -9,7 +9,7 @@
 	
 	
     <body>
-
+		<?php include("header.php"); ?>
     	<?php 
 			$link = new mysqli("localhost","user","user");
 			if ($link->connect_errno){
@@ -35,7 +35,7 @@
 				$_SESSION['identifiant'] = $login; // CREATION VARIABLE GLOBALE login
 				$aa = $type->fetch_row();
 				$_SESSION['type'] =$aa[0];  // CREATION VARIABLE GLOBALE CODE CIE
-				$t=$_SESSION['type'];
+
 				echo "Bon retour parmis nous"; echo "$login"; echo"!"; 
 			
 			}
@@ -55,7 +55,7 @@
 			}
 			$link->close();
 			
-			$essai = '<META HTTP-EQUIV="Refresh" CONTENT="60,acceuil.php">';
+			$essai = '<META HTTP-EQUIV="Refresh" CONTENT="2,acceuil.php">';
 				echo "$essai";
   		?>
         
