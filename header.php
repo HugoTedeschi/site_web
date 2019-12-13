@@ -1,10 +1,10 @@
-	<link href='style2.css' rel='stylesheet'>
+
 <html>
 	<header>
 		<center>
 		<img src="logo.png" height=300px>
 		<img src="header.jpg" height= 300px >
-	
+		<link href='style2.css' rel='stylesheet'>
 		</center>
 	</header>
 </html>

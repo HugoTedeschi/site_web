@@ -5,12 +5,16 @@
     <head>
         <title>Page de confirmation </title>
         <meta charset="utf-8" />
+         <?php include("header.php"); ?>
     </head>
   
 
     <body>
 
     	<?php 
+			
+			
+			
 			
 			$link = new mysqli("localhost","user","user");
 			if ($link->connect_errno){

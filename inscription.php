@@ -1,5 +1,7 @@
+     <head>   
         <title>Page d'inscription </title>
         <meta charset="utf-8" />
+        <?php include("header.php"); ?>
     </head>
 
     <body>

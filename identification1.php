@@ -32,7 +32,7 @@
 				//Si le pseudo et le mot de passe correspondent tout va bien
 				session_start(); // LANCEMENT SESSION
 				 
-				$_SESSION['identifiant'] = $login; // CREATION VARIABLE GLOBALE login
+				 $_SESSION['identifiant'] = $login; // CREATION VARIABLE GLOBALE login
 				$aa = $type->fetch_row();
 				$_SESSION['type'] =$aa[0];  // CREATION VARIABLE GLOBALE CODE CIE
 
