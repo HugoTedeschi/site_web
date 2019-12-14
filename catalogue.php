@@ -52,24 +52,19 @@ GROUP BY modele, type, nom_fourn
 ORDER BY prix;" )
 or die("SELECT Error: ".$link->error);
 
+//~ $result_inf = $link->query( "SELECT modele, type, nom_fourn, prix, SUM(en_stock) AS Nombre
+//~ FROM liste_stockes
+//~ WHERE prix<$prix
+//~ GROUP BY modele, type, nom_fourn
+//~ ORDER BY prix;" )
+//~ or die("SELECT Error: ".$link->error);
 
-
-
-
-
-$result_inf = $link->query( "SELECT modele, type, nom_fourn, prix, SUM(en_stock) AS Nombre
-FROM liste_stockes
-WHERE prix<$prix
-GROUP BY modele, type, nom_fourn
-ORDER BY prix;" )
-or die("SELECT Error: ".$link->error);
-
-$result_sup = $link->query( "SELECT modele, type, nom_fourn, prix, SUM(en_stock) AS Nombre
-FROM liste_stockes
-WHERE prix>$prix
-GROUP BY modele, type, nom_fourn
-ORDER BY prix;" )
-or die("SELECT Error: ".$link->error);
+//~ $result_sup = $link->query( "SELECT modele, type, nom_fourn, prix, SUM(en_stock) AS Nombre
+//~ FROM liste_stockes
+//~ WHERE prix>$prix
+//~ GROUP BY modele, type, nom_fourn
+//~ ORDER BY prix;" )
+//~ or die("SELECT Error: ".$link->error);
 
 
 
@@ -171,7 +166,7 @@ print "<form id='FormulaireCommande'  method='POST' action='pre_commande.php'";
 
 print "<tr>\n";
 
- print "\t<td><input type='reset' value='Recommancer la commande' style='width:350px; background:grey;'></td>\n";
+ print "\t<td><input type='reset' value='Recommencer la commande' style='width:350px; background:grey;'></td>\n";
  print "\t<td></td>\n";
  print "\t<td></td>\n";
  print "\t<td></td>\n";
