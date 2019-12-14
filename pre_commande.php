@@ -140,7 +140,8 @@ if(isset($_POST['commande'])){
 				//Maintenant pour chacun des modèles selectionné:
 				//- 1)
 				//- 2)
-				while ($get_info = $result_instrument->fetch_row() and $i != 0){
+				while ($get_info = $result_instrument->fetch_row() and $i != 0)
+				{
 				
 				echo"<tr>";
 			      //1) on récupère le premier numéro d'instrument pas vendu de la table
@@ -159,27 +160,25 @@ if(isset($_POST['commande'])){
 				
 				}
 				
-				//========================================================================================================================================================
-	            // ASSOCIATION POUR CHAQUE INSTRUMENT A UN MEME NUMERO DE FACTURE 
-			    $modif_no_facture= "(UPDATE Instrument
+         	//========================================================================================================================================================
+	        // ASSOCIATION POUR CHAQUE INSTRUMENT A UN MEME NUMERO DE FACTURE 
+				 
+		   $modif_no_facture= "(UPDATE Instrument
 								   SET no_facture = '$no_facture'
 								   WHERE no_instrument = '$no_instrument');";
-								   
-								   $result =  mysql_query( $modif_no_facture,$link);
-								   	echo  " <p  style='color:white; text-align: center;'>  Votre numéro de facture est $no_facture</p><br>";
-										if (!$result) {
-											die('Requête invalide : ' . mysql_error());
-										}
-				
-				
-			    
-				
-			// maintenant il faut associé ce numéro de facture à tout les instruments selectionnés
-			
-	//===========================================================================================================================================================
-				
+							   
+			      $link->query($modif_no_facture);   
+			     echo  " <p  style='color:white; text-align: center;'> no_facture asssociée aux instrument ! </p><br>";
 				
 		   }
+		  //========================================================================================================================================================
+		  //CREATION DE LA FACTURE
+		  $Mail_client = 'Test.test@gmail.com';
+		  $date = date('m.d.y');
+		    echo  " <p  style='color:white; text-align: center;'> Create facture<br> num facture: $no_facture <br> date = $date <br> $value <br> mailclient: $Mail_client</p><br>";
+		  $FACTURE = "(INSERT INTO Facture VALUES('$no_facture','$date',NULL,'$Mail_client'));";
+		  $link->query($FACTURE);   
+		    
 			
 	
 	//===========================================================================================================================================================
