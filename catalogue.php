@@ -50,7 +50,7 @@ ORDER BY prix;" )
 or die("SELECT Error: ".$link->error);
 
 
-// on va proposer au client de chercher une marque particulière ou bien un type d'instrument au client. 
+// on va proposer au client de chercher une marque particulière, un type d'instrument  ou encore un modèle . 
 print "
 
 	<center> <table style='background:black; color:white;'>
@@ -86,7 +86,7 @@ print "
 
 ";
 
-// en fontion du choix du formulaire, on allouera des valeur différentes aux varaibles $marque, $type et modèle.
+// en fontion du choix du formulaire, on allouera des valeur différentes aux variables $marque, $type et modèle.
   if(isset($_POST['submitTRI']))  
     { 
         // Check if any option is selected 
@@ -123,7 +123,7 @@ print "
   }
 
 //================================================================================================================================================================================================================
-// on instancie ici les bouton pour passer la commande, ou bien la recommancer ( réinitialisé les checkbox cochés)
+// on instancie ici les boutons pour passer la commande, ou bien la recommancer ( réinitialiser les checkbox cochés)
 print "<table width=300 border=1   style='background:black; color:white;'>\n";
 
 print "<tr>\n";
@@ -198,7 +198,7 @@ ORDER BY prix)";
 $result_typeETmarque= $link->query( $sql_typeETmarque)
 or die("SELECT Error: ".$link->error);
 
-//requete pour instrument par type et modèle
+//requete pour les instruments par type et modèle
 $sql_typeETmodele="(SELECT modele, type, nom_fourn, prix, SUM(en_stock) AS Nombre
 FROM liste_stockes
 WHERE type = '$type' and modele='$modele'
@@ -208,7 +208,7 @@ ORDER BY prix)";
 $result_typeETmodele= $link->query( $sql_typeETmodele)
 or die("SELECT Error: ".$link->error);
 
-//requete pour instrument par marque et par modele
+//requete pour les instruments par marque et par modele
 $sql_marqueETmodele="(SELECT modele, type, nom_fourn, prix, SUM(en_stock) AS Nombre
 FROM liste_stockes
 WHERE nom_fourn = '$marque' and modele='$modele'
@@ -219,7 +219,7 @@ $result_typeETmodele= $link->query( $sql_typeETmodele)
 or die("SELECT Error: ".$link->error);
 
 
-//requette pour nstrument par modèle, par marque et par type
+//requette pour les instruments par modèle, par marque et par type
 $sql_typeETmodeleETmarque="(SELECT modele, type, nom_fourn, prix, SUM(en_stock) AS Nombre
 FROM liste_stockes
 WHERE nom_fourn = '$marque' and modele='$modele' and type='$type'
@@ -375,7 +375,8 @@ print "
 // en fontion du choix du formulaire, on allouera des valeur différentes aux varaibles $marque, $type et modèle.
   if(isset($_POST['submitTRI']))  
     { 
-        // Check if any option is selected 
+        // on verifie que on pas lancé le formulaire sans y mettre d'information écrite dedans. De cette
+        //manière, on alloue la valeur à marque, type et modele seulement si ils ont été indiqué dans le formulaire.
         if(!empty($_POST['marque']))  
         { 
 			
@@ -592,9 +593,11 @@ if (isset($_SESSION['identifiant'])) // On verifie qu'il y a bien un pseudo entr
 		
 	} 
 	
-	else{
-	
-	}
+	if(($_SESSION['type']=='vendeur'))   
+	{
+		user();
+		
+	} 
 }
 
 // si ce n'est pas un client.
