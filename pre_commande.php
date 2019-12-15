@@ -202,9 +202,9 @@ if(isset($_POST['commande'])){
 	
 		  //CREATION DE LA COMMANDE
 		  $Mail_client = 'Test.test@gmail.com';
-		  $date=date('y.m.d') + '0000-00-15';
+		  $date=date('y.m.d',strtotime('+15 day'));
 			
-			echo date_format($date,'Y-m-d');
+			echo $date;
 		
 		  echo  " <p  style='color:white; text-align: center;'> la date de livraison sera: $date</p><br>";
 		    
