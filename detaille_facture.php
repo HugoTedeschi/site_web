@@ -62,7 +62,7 @@
 		echo "achat effectué en ligne, livré le "; echo "$get_info[0]";
 	}
 	
-	else{
+	else{  
 		
 		echo "achat effectué en magasin";
 		

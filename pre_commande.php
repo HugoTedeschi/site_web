@@ -10,7 +10,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
  <link href='style.css' rel='stylesheet' type='text/css'>
-  <?php include("menu.php"); ?>
+  <?php include("header.php"); ?>
 
 	
 </head>
@@ -56,9 +56,6 @@ if(isset($_POST['commande'])){
 		if ($link->connect_errno) {
 		die ("Erreur de connexion : errno: " . $link->errno . " error: " . $link->error);
 		}
-		
-		$link->query( "TRUNCATE TABLE PreCommande ")
-		or die("SELECT Error: ".$link->error);
 		
 		
 		
@@ -112,6 +109,21 @@ if(isset($_POST['commande'])){
 			// maintenant il faut associé ce numéro de facture à tout les instruments selectionnés
 			
 	//===========================================================================================================================================================
+	// RECHERCHE d'UN NOUVEAU NUMERO DE COMMANDE
+					    
+			    $lignes_commande = "SELECT * FROM Commande";
+				$result_commande = $link->query($lignes_commande); 
+			
+				while ($get_info = $result_commande->fetch_row())  
+				// avant d'insérer dans la commande, on va parcourir l'ensemble des commandes pour obtenir l'identifiant de la dernère commande +1
+				{  
+					$no_commande = $get_info[0]; 
+					
+				}
+				$no_commande= $no_commande+1;
+				echo  " <p  style='color:white; text-align: center;'> le numero de commande est: $no_commande </p><br>";
+	
+	//===========================================================================================================================================================
 	//on va maintenant récupere les numéro d'isntruments et les lieu de stockage de ces instruments pour chacuns des modèles selectionnés, puis leur affecté un numéo de facture.
 	
 
@@ -157,55 +169,51 @@ if(isset($_POST['commande'])){
     				
 				echo"</tr>";
 				$i = 0;
+				 echo"</table>";
 				
 				}
 				
+		   //========================================================================================================================================================
+		  //CREATION DE LA FACTURE
+		  $Mail_client = $_SESSION['identifiant'];
+		  $date = date('y.m.d');
+		   echo  " <p  style='color:white; text-align: center;'> Create facture<br> num facture: $no_facture <br> date = $date <br> mailclient: $Mail_client</p><br>";
+		  //~ $FACTURE = "(INSERT INTO Facture VALUES('$no_facture','$date','NULL','$Mail_client'));";
+		  //~ $link->query($FACTURE) or die("SELECT Error: ".$link->error);  
+		    
+		    $link->query("INSERT INTO Facture VALUES('$no_facture','$date','NULL','$Mail_client');");
          	//========================================================================================================================================================
 	        // ASSOCIATION POUR CHAQUE INSTRUMENT A UN MEME NUMERO DE FACTURE 
-				 
-		   $modif_no_facture= "(UPDATE Instrument
-								   SET no_facture = '$no_facture'
-								   WHERE no_instrument = '$no_instrument');";
-							   
-			      $link->query($modif_no_facture);   
+				
+		  
 			     echo  " <p  style='color:white; text-align: center;'> no_facture asssociée aux instrument ! </p><br>";
+			     
+			$sql_ville = "UPDATE Instrument
+								   SET no_facture = '$no_facture'
+								   WHERE no_instrument = '$no_instrument';";
+				$link->query($sql_ville)
+					or die("pb de requetes ".$link->error);
+	
 				
 		   }
-		  //========================================================================================================================================================
-		  //CREATION DE LA FACTURE
-		  $Mail_client = 'Test.test@gmail.com';
-		  $date = date('m.d.y');
-		    echo  " <p  style='color:white; text-align: center;'> Create facture<br> num facture: $no_facture <br> date = $date <br> $value <br> mailclient: $Mail_client</p><br>";
-		  $FACTURE = "(INSERT INTO Facture VALUES('$no_facture','$date',NULL,'$Mail_client'));";
-		  $link->query($FACTURE);   
-		    
-			
-	
+		
 	//===========================================================================================================================================================
-	// COMMANDE
-					    
-			    $lignes_commande = "SELECT * FROM Commande";
-				$result_commande = $link->query($lignes_commande); 
-			
-				while ($get_info = $result_commande->fetch_row())  
-				// avant d'insérer dans la commande, on va parcourir l'ensemble des commandes pour obtenir l'identifiant de la dernère commande +1
-				{  
-					$no_commande = $get_info[0]; 
-					
-				}
-				$no_commande= $no_commande+1;
-				echo  " <p  style='color:white; text-align: center;'> le numero de commande est: $no_commande </p><br>";
+	// ATTRIBUTION DES CLEF A LA COMMANDE + INSERTION DANS LA TABLE
 	
-				
-				//~ $sql = "INSERT INTO Facture VALUES ($num_commande,'$frais')"; 
-			    //~ $resultat = mysqli_query($link, $sql);
-			    
-			    
+		  //CREATION DE LA COMMANDE
+		  $Mail_client = 'Test.test@gmail.com';
+		  $date=date('y.m.d') + '0000-00-15';
+			
+			echo date_format($date,'Y-m-d');
+		
+		  echo  " <p  style='color:white; text-align: center;'> la date de livraison sera: $date</p><br>";
+		    
+		    $link->query("INSERT INTO Commande VALUES('$no_commande','15','$date','$no_facture','$adresse_mag');");
 			      
 			      
 			      
 	    
-	    echo"</table>";
+	   
 			  
 			
 		

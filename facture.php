@@ -21,7 +21,7 @@
 			$id=$_SESSION['identifiant'];
 			$sql_facture="SELECT f.no_facture, f.date, f.prix_total, v.nom_mag
 			FROM facture_prix1 f, Facture f1, Vendeur v
-			WHERE f.no_facture=f1.no_facture AND v.mail=f1.mail_vendeur AND f.mail='vincent.barbier@gmail.com';";
+			WHERE f.no_facture=f1.no_facture AND v.mail=f1.mail_vendeur AND f.mail='$id';";
 			$result = $link->query( $sql_facture )
 				or die("SELECT Error: ".$link->error);
 			  
