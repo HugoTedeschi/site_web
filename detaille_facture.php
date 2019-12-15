@@ -11,8 +11,11 @@
 
 	$link = new mysqli('localhost', 'user', 'user', 'madata');
 	if ($link->connect_errno) 	die ("Erreur de connexion : errno: " . $link->errno . " error: " . $link->error);
-	
-	
+ 
+			 $a = $_SESSION['client'];
+			echo "<p>$a</p>";
+
+		
 	print "<table width=300 border=1   style='background:black; color:white;'>\n";
 		print "<tr>\n";
 
@@ -30,6 +33,7 @@
  
  
 	$numero_facture=$_POST['no_facture'];
+	var_dump($numero_facture);
 	$sql_detaille ="SELECT i.no_instrument, i.prix, i.type, i.modele, i.nom_fourn
 					FROM Instrument i
 					WHERE '$numero_facture'=i.no_facture";
@@ -69,7 +73,7 @@
 	}
 	
 	print "</table>\n";
-
+   
 	$result->free();
 	$link->close();
 ?>
