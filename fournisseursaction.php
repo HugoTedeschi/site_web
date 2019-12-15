@@ -40,7 +40,6 @@
 					
 	$result= $link->query($sql_fournisseur)
 		or die("SELECT Error: ".$link->error);
-	var_dump($result);
 	
 	while ($get_info = $result->fetch_row()){
 		

@@ -27,11 +27,8 @@
 	
 <?php
 
-if (isset($_SESSION['identifiant'])) // On verifie qu'il y a bien un pseudo entré, si c'est la cas, affichage bouton déconnexion 
-{ 	
-	if(($_SESSION['type']=='client'))   
-	{
-		
+function client(){
+	
 $link = new mysqli('localhost', 'user', 'user', 'madata');
 if ($link->connect_errno) {
  die ("Erreur de connexion : errno: " . $link->errno . " error: " . $link->error);
@@ -284,25 +281,9 @@ print "</table>\n";
 
 $result->free();
 $link->close();
-	} 
-	
-	else{
-	
-	}
 }
-
-
-
-
-
-
-
-
-
-
-// si ce n'est pas un client.
-else{
-
+function user(){
+	
 $link = new mysqli('localhost', 'user', 'user', 'madata');
 if ($link->connect_errno) {
  die ("Erreur de connexion : errno: " . $link->errno . " error: " . $link->error);
@@ -553,6 +534,23 @@ print "</table>\n";
 
 $result->free();
 $link->close();
+}
+if (isset($_SESSION['identifiant'])) // On verifie qu'il y a bien un pseudo entré, si c'est la cas, affichage bouton déconnexion 
+{ 	
+	if(($_SESSION['type']=='client'))   
+	{
+		client();
+		
+	} 
+	
+	else{
+	
+	}
+}
+
+// si ce n'est pas un client.
+else{
+	user();
 }
 ?>
 
