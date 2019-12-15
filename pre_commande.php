@@ -181,7 +181,7 @@ if(isset($_POST['commande'])){
 		  //~ $FACTURE = "(INSERT INTO Facture VALUES('$no_facture','$date','NULL','$Mail_client'));";
 		  //~ $link->query($FACTURE) or die("SELECT Error: ".$link->error);  
 		    
-		    $link->query("INSERT INTO Facture VALUES('$no_facture','$date','NULL','$Mail_client');");
+		    $link->query("INSERT INTO Facture VALUES('$no_facture','$date',NULL,'$Mail_client');");
          	//========================================================================================================================================================
 	        // ASSOCIATION POUR CHAQUE INSTRUMENT A UN MEME NUMERO DE FACTURE 
 				
