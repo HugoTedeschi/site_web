@@ -53,7 +53,7 @@
 				$mdp = $_POST['mdp'];
 				$nom=$_POST['nom'];
 				$prenom = $_POST['prenom'];
-				$mail=$_POST['adresse_mail'];
+				$mail=$_POST['adresse_email'];
 				$date=$_POST['ddn'];
 				$ville=$_POST['ville'];
 				$adresse=$_POST['adresse'];

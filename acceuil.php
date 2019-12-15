@@ -2,7 +2,7 @@
 	
     <head>
         <title>Page d'Accueil </title>
-		<link href='style2.css' rel='stylesheet'>
+
         <meta charset="utf-8" />
     </head>g
 

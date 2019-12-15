@@ -19,9 +19,9 @@
 				}
 
 			$id=$_SESSION['identifiant'];
-			$sql_facture="SELECT f.no_facture, f.date, f.prix_total
-			FROM facture_prix1 f
-			WHERE f.mail='$id';";
+			$sql_facture="SELECT f.no_facture, f.date, f.prix_total, v.nom_mag
+			FROM facture_prix1 f, Facture f1, Vendeur v
+			WHERE f.no_facture=f1.no_facture AND v.mail=f1.mail_vendeur AND f.mail='vincent.barbier@gmail.com';";
 			$result = $link->query( $sql_facture )
 				or die("SELECT Error: ".$link->error);
 			  
@@ -33,6 +33,8 @@
 		    $value = "date";
 			print "\t<td>$value</td>\n";
 			$value = "prix";
+			print "\t<td>$value</td>\n";
+			$value = "lieux";
 			print "\t<td>$value</td>\n";
 			print "</tr>\n";
 			 
@@ -46,7 +48,7 @@
 				 print "\t<td> <input type='radio' name= 'no_facture' value='$get_info[0]'></td>\n";
 				 print "</tr>\n"; // permet de séparer les lignes de la table entres-elles.
 			}
-			
+			 
 			print "<tr>\n";
 				 print "\t<td></td>\n";
 				 print "\t<td></td>\n";

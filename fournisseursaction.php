@@ -12,36 +12,39 @@
 	$link = new mysqli('localhost', 'user', 'user', 'madata');
 	if ($link->connect_errno) 	die ("Erreur de connexion : errno: " . $link->errno . " error: " . $link->error);
 	
+	print "<p>liste des articles</p>";
 	
 	print "<table width=300 border=1   style='background:black; color:white;'>\n";
 		print "<tr>\n";
 
-			  $value = "numéro d'instrument";
+			  $value = "Modèle";
 			  print "\t<td>$value</td>\n";
-			  $value = "prix          ";
+			  $value = "Type           ";
 			  print "\t<td>$value</td>\n";
-			  $value = "type";
+			  $value = "Marque";
 			  print "\t<td>$value</td>\n";
-			  $value = "modele";
+			  $value = "Prix";
 			  print "\t<td>$value</td>\n";
-			  $value = "marque";
+			  $value = "Nb";
 			  print "\t<td>$value</td>\n";
-		print "</tr>\n";
+  
+      print "</tr>\n";
  
  
-	$numero_facture=$_POST['no_facture'];
-	$sql_detaille ="SELECT i.no_instrument, i.prix, i.type, i.modele, i.nom_fourn
-					FROM Instrument i
-					WHERE '$numero_facture'=i.no_facture";
+	$nom=$_POST['nom'];
+	$sql_fournisseur ="(SELECT modele, type, nom_fourn, prix, SUM(en_stock) AS Nombre
+					FROM liste_stockes
+					WHERE nom_fourn='$nom'
+					GROUP BY modele, type, nom_fourn
+					ORDER BY prix)";
 					
-	$result= $link->query($sql_detaille)
+	$result= $link->query($sql_fournisseur)
 		or die("SELECT Error: ".$link->error);
-
+	var_dump($result);
 	
 	while ($get_info = $result->fetch_row()){
 		
-		
-		 print "<tr>\n";
+		print "<tr>\n";
 			 
 			 foreach ($get_info as $field)
 			 {  
@@ -49,33 +52,13 @@
 			 }
 		 print "</tr>\n"; 
 	}
-	
-	$sql_detaille ="SELECT date
-					FROM Commande
-					WHERE '$numero_facture'= no_facture";
-					
-	$result= $link->query($sql_detaille)
-		or die("SELECT Error: ".$link->error);
 		
-	if ($result->num_rows){
-		$get_info = $result->fetch_row();
-		echo "achat effectué en ligne, livré le "; echo "$get_info[0]";
-	}
-	
-	else{
-		
-		echo "achat effectué en magasin";
-		
-	}
-	
 	print "</table>\n";
 
 	$result->free();
 	$link->close();
 ?>
 
-
 	</body>
 
 </html>
-

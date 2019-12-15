@@ -12,8 +12,8 @@
 			<input type="text" name="prenom" maxlength="20" placeholder="prenom" style="text-transform:capitalize;"></input></br>
 			<input type="text" name="adresse" maxlength="50" placeholder="adresse"></input></br>
 			<input type="text" name="ville" maxlength="50" placeholder="ville" style="text-transform:capitalize;"></input></br>
-			<input type="text" name="adresse_email" maxlength="50" placeholder="email"> </input></br>
-			<input type="password" name="mdp" maxlength="20" placeholder="Mot de passe"></input></br>
+			<input type="email" name="adresse_email" maxlength="50"  placeholder="email"> </input></br>
+			<input type="password" name="mdp" maxlength="20" minlength="6" placeholder="Mot de passe"></input></br>
 			<input type="date" name="ddn" maxlength="15" placeholder="date de naissance"> </input></br>
 
 			<input type="submit" name="ok" value="Valider" >
