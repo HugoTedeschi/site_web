@@ -172,15 +172,43 @@ if(isset($_POST['commande'])){
 				 echo"</table>";
 				
 				}
-		
+				
+		   //========================================================================================================================================================
+		  //CREATION DE LA FACTURE
+		  $Mail_client = $_SESSION['identifiant'];
+		  $date = date('y.m.d');
+		   echo  " <p  style='color:white; text-align: center;'> Create facture<br> num facture: $no_facture <br> date = $date <br> mailclient: $Mail_client</p><br>";
+		  //~ $FACTURE = "(INSERT INTO Facture VALUES('$no_facture','$date','NULL','$Mail_client'));";
+		  //~ $link->query($FACTURE) or die("SELECT Error: ".$link->error);  
+		    
+		    $link->query("INSERT INTO Facture VALUES('$no_facture','$date',NULL,'$Mail_client');");
+         	//========================================================================================================================================================
+	        // ASSOCIATION POUR CHAQUE INSTRUMENT A UN MEME NUMERO DE FACTURE 
+				
+		  
+			     echo  " <p  style='color:white; text-align: center;'> no_facture asssociée aux instrument ! </p><br>";
+			     
+			$sql_ville = "UPDATE Instrument
+								   SET no_facture = '$no_facture'
+								   WHERE no_instrument = '$no_instrument';";
+				$link->query($sql_ville)
+					or die("pb de requetes ".$link->error);
+	
+				
 		   }
 		
 	//===========================================================================================================================================================
-	// INSRTION DES INSTRUMENTS DANS LE PANIER
+	// ATTRIBUTION DES CLEF A LA COMMANDE + INSERTION DANS LA TABLE
 	
-		  //CREATION du panier
+		  //CREATION DE LA COMMANDE
+		  $Mail_client = 'Test.test@gmail.com';
+		  $date=date('y.m.d') + '0000-00-15';
+			
+			echo date_format($date,'Y-m-d');
+		
+		  echo  " <p  style='color:white; text-align: center;'> la date de livraison sera: $date</p><br>";
 		    
-		    //~ $link->query("INSERT INTO Commande VALUES('$no_commande','15','$date','$no_facture','$adresse_mag');");
+		    $link->query("INSERT INTO Commande VALUES('$no_commande','15','$date','$no_facture','$adresse_mag');");
 			      
 			      
 			      
