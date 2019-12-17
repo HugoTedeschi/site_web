@@ -1,9 +1,8 @@
 
 <head>
-<title>Commande</title>
+<title>Pré Commande</title>
 
-	
-	
+
 
 <link <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 …
@@ -21,118 +20,221 @@
 
 <?php
 
-echo  " <p  style='color:white;'> Merci pour votre confiance en nous<br> voici les articles commandé: </p><br>";
+
+//~ function calcul_frais_port($adresse_mag){
+	//~ //ici, pour chacun des magasins, on va déterminer les frais de port associés.
+	//~ if($adresse_mag == '')
+	//~ {
+	//~ }
+	//~ if($adresse_mag == '')
+	//~ {
+	//~ }
+	//~ if($adresse_mag == '')
+	//~ {
+	//~ }
+	//~ if($adresse_mag == '')
+	//~ {
+	//~ }
+//~ }
+
+
+
+
+if(!isset($_POST['formulaire'])){
+	echo  " <p  style='color:white; text-align: center;'> Il semblerait que rien n'ait été selectionné !<br> voici les articles commandé: </p><br>";
+	
+print "<form id='FormulaireCommande'  method='POST' action='catalogue.php'";
+print "<center><input type='submit' value='Recommencer la commande' style='width:1500px; font-size: 80px; background:grey;'></center>"; 
+}
 
 if(isset($_POST['commande'])){
 
-    if(!empty($_POST['formulaire'])) {    
-        foreach($_POST['formulaire'] as $value){
-			
-            echo " <p  style='color:white;'> article commandé: $value </p><br/>";
-        }
-    }
+    if(!empty($_POST['formulaire'])) { 
+		
+		
+		$link = new mysqli('localhost', 'user', 'user', 'madata');
+		if ($link->connect_errno) {
+		die ("Erreur de connexion : errno: " . $link->errno . " error: " . $link->error);
+		}
+		
+		
+		
 
-}
-echo  " <p  style='color:white;'>Merci de valider la commande suivante en appyant sur \"valider la commande \".</p>";
+		echo  "<p  style='color:white;'>Merci de valider la commande suivante en appyant sur \"valider la commande \".</p>";
 
-
-
-
-
-
-
-
+		print "<table width=300 border=1   style='background:black; color:white;'>\n";
+		print "<tr>\n";
 
 
+		print "<form id='FormulaireCommande'  method='POST' action='catalogue.php'";
+		print "\t<td><input type='submit' value='Recommencer la commande' style='width:1000px; font-size: 60px; background:grey;'></td>\n"; 
 
 
-
-
-
-
-
-print "<table width=300 border=1   style='background:black; color:white;'>\n";
-
-
-print "<form id='FormulaireCommande'  method='POST' action='commande.php'";
-
-
-
-print "<tr>\n";
-
- print "\t<td><input type='reset' value='Recommancer la commande' style='width:350px; background:grey;'></td>\n";
- print "\t<td></td>\n";
- print "\t<td></td>\n";
- print "\t<td></td>\n";
- print "\t<td></td>\n";
- print "\t<td><input type='submit' value='Passer la commande' name ='commande'style='width:350px; background:grey;'></td>\n";
-    
-  
- print "</tr>\n";
- 
- 
-
-
-print "<tr>\n";
-
-$value = "Modèle";
- print "\t<td>$value</td>\n";
- $value = "Type           ";
-  print "\t<td>$value</td>\n";
-  $value = "Marque";
-  print "\t<td>$value</td>\n";
-  $value = "Prix";
-  print "\t<td>$value</td>\n";
-  $value = "Nb";
-  print "\t<td>$value</td>\n";
-  $value = "Commander:";
-  print "\t<td>$value</td>\n";
-  
- print "</tr>\n";
- 
- 
-$sql_marque="(SELECT modele, type, nom_fourn, prix, SUM(en_stock) AS Nombre
-FROM liste_stockes
-WHERE nom_fourn = '$marque'
-GROUP BY modele, type, nom_fourn
-ORDER BY prix)";
-
-$result_marque = $link->query( $sql_marque )
-or die("SELECT Error: ".$link->error);
- 
- if($marque == 'rien')
- {
-	 $result = $catalogue;
- }
- else
- {
-	 $result = $result_marque ;
 	 
+		print "<form id='FormulaireCommande'  method='POST' action='commande.php'"; 
+		print "\t<td><input type='submit' value='Valider la commande' name ='commande'style='width:1000px; font-size: 60px; background:grey;'></td>\n";
+		
+		
+		print "</tr>\n";
+		print "</form>";
+		print "</table>";
+
+
+		 //~ array_keys($_POST['formulaire']);   
+		echo  " <p  style='color:white;'> Merci pour votre confiance en nous<br> voici les articles commandé: </p><br>";
+		 print "<table width=300 border=1   style='background:black; color:white;'>\n";
+		 
+		 
+		 $compteur = 0;
+		 
+		 
+		 
+    //========================================================================================================================================================
+	// RECHERCHE D'UN NOUVEAU NUMERO DE FACTURE VALIDE			 
+	   
+			    $lignes_facture = "SELECT * FROM Facture";
+				$result_facture = $link->query($lignes_facture); 
+				
+				while ($get_info = $result_facture->fetch_row())  
+				// avant d'insérer dans la facture, on va parcourir l'ensemble des facture pour obtenir l'identifiant de la dernère commande +1. pour créer une 
+				// nouvelle facture dont l'id n'est pas déjà utilisé.
+				{  
+					$no_facture = $get_info[0]; 
+				
+					
+				}
+				$no_facture = $no_facture+1;  
+				echo  " <p  style='color:white; text-align: center;'>  Votre numéro de facture est $no_facture</p><br>";
+				
+			// maintenant il faut associé ce numéro de facture à tout les instruments selectionnés
+			
+	//===========================================================================================================================================================
+	// RECHERCHE d'UN NOUVEAU NUMERO DE COMMANDE
+					    
+			    $lignes_commande = "SELECT * FROM Commande";
+				$result_commande = $link->query($lignes_commande); 
+			
+				while ($get_info = $result_commande->fetch_row())  
+				// avant d'insérer dans la commande, on va parcourir l'ensemble des commandes pour obtenir l'identifiant de la dernère commande +1
+				{  
+					$no_commande = $get_info[0]; 
+					
+				}
+				$no_commande= $no_commande+1;
+				echo  " <p  style='color:white; text-align: center;'> le numero de commande est: $no_commande </p><br>";
 	
- }
-       		
-while ($get_info = $result->fetch_row()){
- print "<tr>\n";
- 
- 
- 
- 
- // en gros faudrait pouvoir récupérer la valeur de get_info[0], correspondant à l'indice de l'instru.
- foreach ($get_info as $field)
- {  // on fait indice par indice pour le sous tableau (une ligne de la table en gros)
-	print "\t<td> $field</td>\n";
- }
- print "\t<td> <input type='checkbox' name= 'formulaire[]' value='$get_info[0]'></td>\n";
- 
- 
- 
- print "</tr>\n"; // permet de séparer les lignes de la table entres-elles.
+	//===========================================================================================================================================================
+	//on va maintenant récupere les numéro d'isntruments et les lieu de stockage de ces instruments pour chacuns des modèles selectionnés, puis leur affecté un numéo de facture.
+	
+
+        foreach($_POST['formulaire'] as $ligne){  // on recupère l'ensemble des lignes contenus dans $_POST qui stockes les elements selectionnés
+			// on créer un tableau qui stocke tout les modèles choisis précedemment. 
+			   
+				  echo"<tr>\n";
+			      echo "\t<td></tr> <p  style='color:white;'> --> $ligne</p><br/></td>\n";
+			      echo"</tr>\n";
+	     
+	 
+	     
+			      
+			      
+			    $lignes_instrument = "SELECT no_instrument, cout, prix, type, modele, nom_fourn, adresse_mag FROM Instrument WHERE modele='$ligne' and no_facture IS NULL";
+				
+				$result_instrument = $link->query($lignes_instrument) 
+				   // on va récuperer la tables istruments, afin d'obtenir un instrument coorespondant à celui commandé, mais n'étant pas déjà vendu (donc pas associé à une facture), 
+				// on va aisi pouvoir insérer dans commande, un instrument qui dont le no_instrument ne correspond pas à un instrument vendu. 
+				
+				or die("SELECT Error: ".$link->error);
+					
+				$i = 1;
+				
+				//---------------------------------------------------------------------
+				//Maintenant pour chacun des modèles selectionné:
+				//- 1)
+				//- 2)
+				while ($get_info = $result_instrument->fetch_row() and $i != 0)
+				{
+				
+				echo"<tr>";
+			      //1) on récupère le premier numéro d'instrument pas vendu de la table
+					$no_instrument = $get_info[0];  
+						print "\t<td>$no_instrument</td>\n";
+						
+						
+						
+						
+					//2) on récupère l'adresse du magasin associé à cet instrument pas vendu de la table
+					$adresse_mag = $get_info[6];  
+						print "\t<td>$adresse_mag</td>\n";
+    				
+				echo"</tr>";
+				$i = 0;
+				 echo"</table>";
+				
+				}
+				
+		   //========================================================================================================================================================
+		  //CREATION DE LA FACTURE
+		  $Mail_client = $_SESSION['identifiant'];
+		  $date = date('y.m.d');
+		   echo  " <p  style='color:white; text-align: center;'> Create facture<br> num facture: $no_facture <br> date = $date <br> mailclient: $Mail_client</p><br>";
+		  //~ $FACTURE = "(INSERT INTO Facture VALUES('$no_facture','$date','NULL','$Mail_client'));";
+		  //~ $link->query($FACTURE) or die("SELECT Error: ".$link->error);  
+		    
+		    $link->query("INSERT INTO Facture VALUES('$no_facture','$date',NULL,'$Mail_client');");
+         	//========================================================================================================================================================
+	        // ASSOCIATION POUR CHAQUE INSTRUMENT A UN MEME NUMERO DE FACTURE 
+				
+		  
+			     echo  " <p  style='color:white; text-align: center;'> no_facture asssociée aux instrument ! </p><br>";
+			     
+			$sql_ville = "UPDATE Instrument
+								   SET no_facture = '$no_facture'
+								   WHERE no_instrument = '$no_instrument';";
+				$link->query($sql_ville)
+					or die("pb de requetes ".$link->error);
+	
+				
+		   }
+		
+	//===========================================================================================================================================================
+	// ATTRIBUTION DES CLEF A LA COMMANDE + INSERTION DANS LA TABLE
+	
+		  //CREATION DE LA COMMANDE
+		  $Mail_client = 'Test.test@gmail.com';
+		  $date=date('y.m.d',strtotime('+15 day'));
+			
+			echo $date;
+		
+		  echo  " <p  style='color:white; text-align: center;'> la date de livraison sera: $date</p><br>";
+		    
+		    $link->query("INSERT INTO Commande VALUES('$no_commande','15','$date','$no_facture','$adresse_mag');");
+			      
+			      
+			      
+	    
+	   
+			  
+			
+		
+		
+	
+		
+
+  
+  
+	
+
+
+
+	}
+
 }
-
-
-print "</form>";
-print "</table>\n";
-
-
-//~ CREATE TABLE PreCommande( modele VARCHAR(128) , type VARCHAR(128), nom_fourn VARCHAR(128), prix INT(10), nombre INT(10) )
+	
+	
+	
+	
+	
+	
+	
 ?>

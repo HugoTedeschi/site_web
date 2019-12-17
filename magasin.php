@@ -25,9 +25,9 @@
 			print "<table >\n";
 			print "<form method='POST' action='magasinaction.php'";
 			print "<tr>\n";
-		    $value = "ville";
+		    $value = "adresse";
 			print "\t<td>$value</td>\n";
-			$value = "adresse";
+			$value = "ville";
 			print "\t<td>$value</td>\n";
 			print "</tr>\n";
 			 

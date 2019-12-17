@@ -4,7 +4,6 @@
 
 
 <link <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-…
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
@@ -17,7 +16,7 @@
 
 <body style='background:black; color:white;'>
 
-	<h2>Bienvenue sur notre catalogue en ligne !</h2>
+	<center><h2>Bienvenue sur notre catalogue en ligne !</h2></center>
 		<form action="catalogue.php" >
 		<center>	<input type="submit" value="Revenir au catalogue"  style='width:500px; background:grey; padding : 20px; font-size: 40px; text-align: center;' /></center>
 		</form>
@@ -80,7 +79,7 @@ print "
         </tr>
         </table></center>
         
-      <center>  <p>  <input type = 'submit' name = 'submitTRI' value = 'Appliquer la selection' style='background:grey; color:white; width:800;'> </form>  ;</p></center>
+      <center>  <p>  <input type = 'submit' name = 'submitTRI' value = 'Appliquer la selection' style='background:grey; color:white; width:800;'> </form>  </p></center>
 		
        
 

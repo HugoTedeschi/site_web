@@ -4,7 +4,7 @@
         <title>Page d'Accueil </title>
 
         <meta charset="utf-8" />
-    </head>g
+    </head>
 
     <body>
     
